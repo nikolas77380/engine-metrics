@@ -1,8 +1,9 @@
-const API_URL = 'http://192.168.3.1/';
+import axios from "axios";
 
-export const get = (url) => {
-    return fetch(API_URL + url, {
-        method: 'GET',
-        mode: 'no-cors'
-    })
+const API =  axios.create({
+    baseURL: "http://192.168.3.161/",
+});
+
+export const get = (url, params = null) => {
+    return API.get(url, params);
 }

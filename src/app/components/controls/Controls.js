@@ -10,6 +10,7 @@ import LabelledOutline from "../common/LabelOutlined";
 
 import {
   readData,
+  writeCanId,
   requestCanId,
   startCan,
   stopCan,
@@ -122,24 +123,33 @@ export function Controls() {
   },[])
 
   useEffect(() => {
+    // console.log(Object.keys(canIds))
+    setAllIds(canIds)
+  }, [canIds]);
+
+  useEffect(() => {
     setCan(canStatus);
-  }, [canStatus])
+  }, [canStatus]);
 
   const handleStopCan = () => {
     dispatch(stopCan());
-  }
+  };
 
   const handleStartCan = () => {
     dispatch(startCan());
-  }
+  };
 
   const handleRead = () => {
     dispatch(readData());
-  }
+  };
+
+  const handleWriteIdCan = () => {
+    dispatch(writeCanId(allIds));
+  };
 
   const changeHandler = e => {
     setAllIds({...allIds, [e.target.name]: e.target.value})
-  }
+  };
 
   const textFields = canIdsArray.map(el => {
     return <TextField
@@ -152,6 +162,7 @@ export function Controls() {
               onChange={changeHandler}
               variant="outlined"
               style={{marginRight:'5px'}}
+              InputLabelProps={{ shrink: true }}
     />
  })
   return (
@@ -164,7 +175,8 @@ export function Controls() {
             variant="contained"
             color="primary"
             size="small"
-            disabled={loading}
+            onClick={handleWriteIdCan}
+            disabled={loading || allIds == canIds}
             className={classes.button}
             startIcon={<SaveIcon />}
         >

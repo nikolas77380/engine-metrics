@@ -7,6 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import {useSelector} from "react-redux";
 
 const columns = [
     { id: 'id', label: 'ID', minWidth: 10, maxWidth:10, align: 'center', width:10 },
@@ -48,6 +49,11 @@ const useStyles = makeStyles({
 
 export default function DataTable() {
     const classes = useStyles();
+    const data = useSelector(state => state.controls.data);
+    console.log(data)
+    let rows = data.map(row => {
+        return createData(row[0], row[1], row.slice(2, 10).join(' '), row.slice(10, row.length))
+    })
     return (
         <Paper className={classes.root}>
             <TableContainer className={classes.container}>

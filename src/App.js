@@ -160,7 +160,7 @@ export default function App() {
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
                         {/* Controls */}
-                        <Grid item xs={3} md={4} lg={3}>
+                        <Grid item xs={4} md={4} lg={4}>
                             <Paper className={fixedHeightPaper}>
                                 <Typography align={"center"} style={{marginBottom: '20px'}} variant="h5" component="h2">
                                     Settings
